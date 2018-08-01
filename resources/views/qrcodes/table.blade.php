@@ -1,8 +1,8 @@
 <table class="table table-responsive" id="qrcodes-table">
     <thead>
         <tr>
-        <th>Website</th>
         <th>Company Name</th>
+        <th>Website</th>
         <th>Amount</th>
         <th>Status</th>
             <th colspan="3">Action</th>
@@ -12,9 +12,13 @@
     @foreach($qrcodes as $qrcode)
         <tr>
 
-            <td>{!! $qrcode->website !!}</td>
-            <td>{!! $qrcode->company_name !!}</td>
+            <td>
+                <a href="{!! route('qrcodes.show', [$qrcode->id]) !!}" class="text-info">
+                    <b>{!! $qrcode->company_name !!}</b>
+                </a>
 
+            </td>
+            <td>{!! $qrcode->website !!}</td>
             <td>£ {!! $qrcode->amount !!}</td>
             <td>
                 @if($qrcode->status == 1)
