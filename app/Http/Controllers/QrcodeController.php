@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateQrcodeRequest;
 use App\Http\Requests\UpdateQrcodeRequest;
-use App\Models\Qrcode;
+use Qrcode;
 use App\Repositories\QrcodeRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
-use Auth;
+
 
 class QrcodeController extends AppBaseController
 {
@@ -60,34 +60,36 @@ class QrcodeController extends AppBaseController
         $input = $request->all();
 
         //Save  data to the database
-
         $qrcode = $this->qrcodeRepository->create($input);
 
-        //generate qrcode
-        //save qrcode image in our folder on this site
+        //Generate qrcode
+        //save  qrcode image in our folder on this site
+        $file = 'qrcodes-generator/'.$qrcode->id . '.png';
 
-        $file       =   'qrcodes/'.$qrcode->id.'.png';
-
-        $newQrcode  =    QRCode ::text("message")
+       $newQrcode =  Qrcode::text("message")
             ->setSize(4)
             ->setMargin(2)
             ->setOutfile($file)
             ->png();
 
+       // Save the qrcode
         if ($newQrcode)
         {
-            $input['qrcode_code'] = $file;
+            $input['qrcode_path'] = $file;
 
-            //Save data to the database
+            //Save  data to the database
             $qrcode = $this->qrcodeRepository->create($input);
+
             Flash::success('Qrcode saved successfully.');
-        }else{
-            Flash::error('Qrcode failed to save successfully');
+
+        }else
+        {
+
+            Flash::error('Qrcode failed to save.');
         }
 
 
-
-        return redirect(route('qrcodes.index',['qrcode'=>$qrcode]));
+        return redirect(route('qrcodes.show',['qrcode'=>$qrcode]));
     }
 
     /**
