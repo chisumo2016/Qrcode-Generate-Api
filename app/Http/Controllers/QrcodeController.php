@@ -71,14 +71,14 @@ class QrcodeController extends AppBaseController
         $file = 'qrcodes-generator/'.$qrcode->id.'.png';
 
          QRCode::text("message")
-            ->setSize(4)
+            ->setSize(8)
             ->setMargin(2)
             ->setOutfile($file)
             ->png();
 
         $input['qrcode_path'] = $file;
 
-        dd($input['qrcode_path']);
+        //dd($input['qrcode_path']);
 
         //updating database
         $newQrcode = QrcodeModel::where('id',$qrcode->id)->update(['qrcode_path' => $input['qrcode_path']]);
