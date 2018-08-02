@@ -11,15 +11,32 @@
         </h3>
     </div>
 
-    <!-- Id Field -->
+    <!-- Amount Field -->
     <div class="form-group">
-        {!! Form::label('id', 'Id:') !!}
-        <p>{!! $qrcode->id !!}</p>
+        {{--{!! Form::label('amount', 'Amount:') !!}--}}
+        <h4>Amount: £ {!! $qrcode->amount !!}</h4>
     </div>
 
-    <!-- User Id Field -->
+
+    <!-- Product Url Field -->
     <div class="form-group">
-        {!! Form::label('user_id', 'User Id:') !!}
+        {!! Form::label('product_url', 'Product Url:') !!}
+        <p>
+            <a href="{!! $qrcode->product_url !!}" target="_blank">
+            {!! $qrcode->product_url !!}
+
+            </a>
+
+        </p>
+    </div>
+
+
+    <!-- User Id Field -->
+    @if($qrcode->user_id  == Auth::user()->id || Auth::user()->role_id < 3)
+        <hr>
+
+    <div class="form-group">
+        {!! Form::label('user_id', 'User Name:') !!}
         <p>{!! $qrcode->user_id !!}</p>
     </div>
 
@@ -29,35 +46,25 @@
         <p>{!! $qrcode->website !!}</p>
     </div>
 
-    {{--<!-- Company Name Field -->--}}
-    {{--<div class="form-group">--}}
-        {{--{!! Form::label('company_name', 'Company Name:') !!}--}}
-        {{--<p>{!! $qrcode->company_name !!}</p>--}}
-    {{--</div>--}}
-
-
-    <!-- Product Url Field -->
-    <div class="form-group">
-        {!! Form::label('product_url', 'Product Url:') !!}
-        <p>{!! $qrcode->product_url !!}</p>
-    </div>
-
     <!-- Callback Url Field -->
     <div class="form-group">
         {!! Form::label('callback_url', 'Callback Url:') !!}
         <p>{!! $qrcode->callback_url !!}</p>
     </div>
 
-    <!-- Amount Field -->
-    <div class="form-group">
-        {!! Form::label('amount', 'Amount:') !!}
-        <p>{!! $qrcode->amount !!}</p>
-    </div>
 
     <!-- Status Field -->
     <div class="form-group">
         {!! Form::label('status', 'Status:') !!}
-        <p>{!! $qrcode->status !!}</p>
+        <p>
+            @if($qrcode->status == 1 )
+                Active
+            @else                         {{--{!! $qrcode->status !!}--}}
+                Inactive
+
+             @endif
+
+        </p>
     </div>
 
     <!-- Created At Field -->
@@ -72,7 +79,7 @@
         <p>{!! $qrcode->updated_at !!}</p>
     </div>
 </div>
-
+@endif
 <div class="col-md-5 pull-right">
 
     <!-- Qrcode Path Field {!! $qrcode->qrcode_path !!}-->
@@ -84,4 +91,17 @@
     </div>
 
 </div>
+
+{{--<!-- Id Field -->--}}
+{{--<div class="form-group">--}}
+{{--{!! Form::label('id', 'Id:') !!}--}}
+{{--<p>{!! $qrcode->id !!}</p>--}}
+{{--</div>--}}
+
+{{--<!-- Company Name Field -->--}}
+{{--<div class="form-group">--}}
+{{--{!! Form::label('company_name', 'Company Name:') !!}--}}
+{{--<p>{!! $qrcode->company_name !!}</p>--}}
+{{--</div>--}}
+
 
