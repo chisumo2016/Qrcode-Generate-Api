@@ -5,7 +5,7 @@
         <th>Website</th>
         <th>Amount</th>
         <th>Status</th>
-            <th colspan="3">Action</th>
+        <th colspan="3">Action</th>
         </tr>
     </thead>
     <tbody>
