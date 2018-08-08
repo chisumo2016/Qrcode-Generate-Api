@@ -94,5 +94,14 @@ class User extends Model
     {
         return $this->hasMany('App\Models\Trasanction');
     }
+
+    /**
+     * Get the role that owns this users.   User can have one role
+     */
+    public function role()
+    {
+        return $this->belongsTo('App\Models\Role');
+    }
+
     
 }

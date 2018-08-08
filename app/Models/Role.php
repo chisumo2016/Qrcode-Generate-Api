@@ -57,6 +57,12 @@ class Role extends Model
     public static $rules = [
         
     ];
-
-    
+    /**
+     * Get the users   for the role.  Role can have many user   1:M
+     */
+    public function users()
+    {
+        return $this->hasMany('App\Models\User');
+    }
+//
 }
