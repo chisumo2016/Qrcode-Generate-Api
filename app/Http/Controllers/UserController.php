@@ -9,6 +9,7 @@ use App\Repositories\UserRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Hash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -125,7 +126,14 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        $user = $this->userRepository->update($request->all(), $id);
+        $input  = $request->all();
+        if (!empty($input['password']))
+        {
+            $input['password'] = Hash::make($input['password']) ;
+        }
+
+        $user = $this->userRepository->update($input, $id);
+        //$user = $this->userRepository->update($request->all(), $id);
 
         Flash::success('User updated successfully.');
 
