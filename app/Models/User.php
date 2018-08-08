@@ -87,5 +87,12 @@ class User extends Model
         
     ];
 
+    /**
+     * Get the transactions   for the user.
+     */
+    public function trasanctions()
+    {
+        return $this->hasMany('App\Models\Trasanction');
+    }
     
 }

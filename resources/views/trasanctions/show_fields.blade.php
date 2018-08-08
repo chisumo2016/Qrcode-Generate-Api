@@ -8,16 +8,30 @@
 <div class="form-group">
     {!! Form::label('qrcode_id', 'Product Name:') !!}
 
-    <p>{!! $trasanction->qrcode['product_name'] !!}</p>
+    <p>
+        <a href="/qrcodes/{!! $trasanction->qrcode['id'] !!}">
+           <b> {!! $trasanction->qrcode['product_name'] !!} </b>
+        </a>
 
+    </p>
+</div>
 
+<!-- Amount Field -->
+<div class="form-group">
+    {!! Form::label('amount', 'Amount:') !!}
+    <p>£ {!! $trasanction->amount !!}</p>
 </div>
 
 
 <!-- User Id Field -->
 <div class="form-group">
     {!! Form::label('user_id', 'Buyer Name:') !!}
-    <p>{!! $trasanction->user_id !!}</p>
+
+    <p>
+        <a href="/users/{!! $trasanction->user['id'] !!}">
+        {!! $trasanction->user['name'] !!}  | {!! $trasanction->user['email'] !!}
+        </a>
+    </p>
 </div>
 
 
@@ -25,7 +39,13 @@
 <!-- Qrcode Owner Id Field -->
 <div class="form-group">
     {!! Form::label('qrcode_owner_id', 'Qrcode Owner Mame:') !!}
-    <p>{!! $trasanction->qrcode_owner_id !!}</p>
+    <p>
+        <a href="/users/{!! $trasanction->qrcode_owner['id'] !!}">
+
+            {!! $trasanction->qrcode_owner['name']  !!}
+        </a>
+
+    </p>
 </div>
 
 <!-- Payment Method Field -->
@@ -40,11 +60,7 @@
     <p>{!! $trasanction->message !!}</p>
 </div>
 
-<!-- Amount Field -->
-<div class="form-group">
-    {!! Form::label('amount', 'Amount:') !!}
-    <p>{!! $trasanction->amount !!}</p>
-</div>
+
 
 <!-- Status Field -->
 <div class="form-group">
@@ -55,12 +71,12 @@
 <!-- Created At Field -->
 <div class="form-group">
     {!! Form::label('created_at', 'Created At:') !!}
-    <p>{!! $trasanction->created_at !!}</p>
+    <p>{!! $trasanction->created_at->format('D d, M, Y h:i') !!}</p>
 </div>
 
 <!-- Updated At Field -->
 <div class="form-group">
     {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{!! $trasanction->updated_at !!}</p>
+    <p>{!! $trasanction->updated_at->format('D d, M, Y h:i') !!}</p>
 </div>
 
