@@ -116,5 +116,12 @@ class Qrcode extends Model
         
     ];
 
+    /**
+     * Get the transactions   for the qrcode.
+     */
+    public function trasanctions()
+    {
+        return $this->hasMany('App\Models\Trasanction');
+    }
     
 }

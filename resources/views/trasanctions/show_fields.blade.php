@@ -1,24 +1,30 @@
 <!-- Id Field -->
-<div class="form-group">
-    {!! Form::label('id', 'Id:') !!}
-    <p>{!! $trasanction->id !!}</p>
-</div>
-
-<!-- User Id Field -->
-<div class="form-group">
-    {!! Form::label('user_id', 'User Id:') !!}
-    <p>{!! $trasanction->user_id !!}</p>
-</div>
+{{--<div class="form-group">--}}
+    {{--{!! Form::label('id', 'ID:') !!}--}}
+    {{--<p>Transaction ID: #{!! $trasanction->id !!}</p>--}}
+{{--</div>--}}
 
 <!-- Qrcode Id Field -->
 <div class="form-group">
-    {!! Form::label('qrcode_id', 'Qrcode Id:') !!}
-    <p>{!! $trasanction->qrcode_id !!}</p>
+    {!! Form::label('qrcode_id', 'Product Name:') !!}
+
+    <p>{!! $trasanction->qrcode['product_name'] !!}</p>
+
+
 </div>
+
+
+<!-- User Id Field -->
+<div class="form-group">
+    {!! Form::label('user_id', 'Buyer Name:') !!}
+    <p>{!! $trasanction->user_id !!}</p>
+</div>
+
+
 
 <!-- Qrcode Owner Id Field -->
 <div class="form-group">
-    {!! Form::label('qrcode_owner_id', 'Qrcode Owner Id:') !!}
+    {!! Form::label('qrcode_owner_id', 'Qrcode Owner Mame:') !!}
     <p>{!! $trasanction->qrcode_owner_id !!}</p>
 </div>
 

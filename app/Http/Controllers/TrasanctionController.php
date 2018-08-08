@@ -75,6 +75,7 @@ class TrasanctionController extends AppBaseController
     {
         $trasanction = $this->trasanctionRepository->findWithoutFail($id);
 
+
         if (empty($trasanction)) {
             Flash::error('Trasanction not found');
 

@@ -104,5 +104,12 @@ class Trasanction extends Model
         
     ];
 
-    
+    /**
+    * Get the qrcode that owns the transaction.
+    */
+    public function qrcode()
+    {
+        return $this->belongsTo('App\Models\Qrcode');
+    }
+
 }
