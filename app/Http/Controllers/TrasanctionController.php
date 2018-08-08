@@ -74,6 +74,7 @@ class TrasanctionController extends AppBaseController
     public function show($id)
     {
         $trasanction = $this->trasanctionRepository->findWithoutFail($id);
+       // dd($trasanction);
 
 
         if (empty($trasanction)) {
