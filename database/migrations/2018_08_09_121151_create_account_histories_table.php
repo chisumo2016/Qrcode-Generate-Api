@@ -15,7 +15,10 @@ class CreateAccountHistoriesTable extends Migration
     {
         Schema::create('account_histories', function (Blueprint $table) {
             $table->increments('id');
-            $table->
+            $table->integer('account_id');
+            $table->integer('user_id');
+            $table->string('message'); // tracks msgs
+            $table->softDeletes();
             $table->timestamps();
         });
     }

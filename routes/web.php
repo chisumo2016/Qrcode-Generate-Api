@@ -31,6 +31,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('users', 'UserController');
 
+    Route::resource('accounts', 'AccountController');
+
+    Route::resource('accountHistories', 'AccountHistoryController');
+
 
     //Only Moderators and admin
     Route::group(['middleware' => 'moderator'], function () {
@@ -41,3 +45,5 @@ Route::group(['middleware' => 'auth'], function () {
     //Only Admin
     Route::resource('roles', 'RoleController')->middleware('Admin');
 });
+
+
