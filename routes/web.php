@@ -28,7 +28,16 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('trasanctions', 'TrasanctionController');
 
+
     Route::resource('users', 'UserController');
 
+
+    //Only Moderators and admin
+    Route::group(['middleware' => 'moderator'], function () {
+
+        Route::get('/users', 'UserController@index')->name('users.index');
+    });
+
+    //Only Admin
     Route::resource('roles', 'RoleController')->middleware('Admin');
 });
