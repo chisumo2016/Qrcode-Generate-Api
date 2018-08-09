@@ -164,5 +164,12 @@ class Account extends Model
         
     ];
 
+    /**
+     * Get the user record associated with the account
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
     
 }

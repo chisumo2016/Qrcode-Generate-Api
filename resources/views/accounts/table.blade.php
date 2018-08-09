@@ -1,7 +1,7 @@
 <table class="table table-responsive" id="accounts-table">
     <thead>
         <tr>
-            <th>User Id</th>
+            <th>User </th>
         <th>Balance</th>
         <th>Total Credit</th>
         <th>Total Debit</th>
@@ -14,7 +14,7 @@
         {{--<th>Paid</th>--}}
         {{--<th>Last Date Applied</th>--}}
         {{--<th>Last Date Paid</th>--}}
-        <th>Country</th>
+        {{--<th>Country</th>--}}
         {{--<th>Other Details</th>--}}
             <th colspan="3">Action</th>
         </tr>
@@ -22,10 +22,10 @@
     <tbody>
     @foreach($accounts as $account)
         <tr>
-            <td>{!! $account->user_id !!}</td>
-            <td>{!! $account->balance !!}</td>
-            <td>{!! $account->total_credit !!}</td>
-            <td>{!! $account->total_debit !!}</td>
+            <td>{!! $account->user['email'] !!}</td>
+            <td>£{!! $account->balance !!}</td>
+            <td>£{!! $account->total_credit !!}</td>
+            <td>£{!! $account->total_debit !!}</td>
             {{--<td>{!! $account->withdraw_method !!}</td>--}}
             {{--<td>{!! $account->payment_email !!}</td>--}}
             {{--<td>{!! $account->bank_name !!}</td>--}}
@@ -35,7 +35,7 @@
             {{--<td>{!! $account->paid !!}</td>--}}
             {{--<td>{!! $account->last_date_applied !!}</td>--}}
             {{--<td>{!! $account->last_date_paid !!}</td>--}}
-            <td>{!! $account->country !!}</td>
+            {{--<td>{!! $account->country !!}</td>--}}
             {{--<td>{!! $account->other_details !!}</td>--}}
             <td>
                 {!! Form::open(['route' => ['accounts.destroy', $account->id], 'method' => 'delete']) !!}
