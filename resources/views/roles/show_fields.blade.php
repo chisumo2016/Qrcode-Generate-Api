@@ -18,6 +18,10 @@
     <p>{!! $role->updated_at->format('D d, M, Y') !!}</p>
 </div>
 
+<h3 class="text-center">Users that belongs to see roles</h3>
+@include('users.table')
+
+
 
 {{--<div class="form-group">--}}
     {{--{!! Form::label('id', 'Id:') !!}--}}
