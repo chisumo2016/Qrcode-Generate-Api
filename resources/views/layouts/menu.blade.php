@@ -3,6 +3,19 @@
 <li class="{{ Request::is('trasanctions*') ? 'active' : '' }}">
     <a href="{!! route('trasanctions.index') !!}"><i class="fa fa-edit"></i><span>Trasanctions</span></a>
 </li>
+
+
+<li class="{{ Request::is('accounts*') ? 'active' : '' }}">
+    <a href="{!! route('accounts.index') !!}"><i class="fa fa-edit"></i><span>Accounts</span></a>
+</li>
+
+<li class="{{ Request::is('accountHistories*') ? 'active' : '' }}">
+    <a href="{!! route('accountHistories.index') !!}"><i class="fa fa-edit"></i><span>Account Histories</span></a>
+</li>
+
+
+
+
 @if(Auth::user()->role_id < 4)
 {{-- All Webmaster --}}
 <li class="{{ Request::is('qrcodes*') ? 'active' : '' }}">
@@ -24,11 +37,4 @@
 
 @endif
 
-<li class="{{ Request::is('accounts*') ? 'active' : '' }}">
-    <a href="{!! route('accounts.index') !!}"><i class="fa fa-edit"></i><span>Accounts</span></a>
-</li>
-
-<li class="{{ Request::is('accountHistories*') ? 'active' : '' }}">
-    <a href="{!! route('accountHistories.index') !!}"><i class="fa fa-edit"></i><span>Account Histories</span></a>
-</li>
 

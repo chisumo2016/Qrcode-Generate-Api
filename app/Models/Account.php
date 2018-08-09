@@ -65,6 +65,30 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *          type="string"
  *      ),
  *      @SWG\Property(
+ *          property="applied_for_payout",
+ *          description="applied_for_payout",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="paid",
+ *          description="paid",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="last_date_applied",
+ *          description="last_date_applied",
+ *          type="string",
+ *          format="date"
+ *      ),
+ *      @SWG\Property(
+ *          property="last_date_paid",
+ *          description="last_date_paid",
+ *          type="string",
+ *          format="date"
+ *      ),
+ *      @SWG\Property(
  *          property="country",
  *          description="country",
  *          type="string"
@@ -99,6 +123,10 @@ class Account extends Model
         'bank_name',
         'bank_branch',
         'bank_account',
+        'applied_for_payout',
+        'paid',
+        'last_date_applied',
+        'last_date_paid',
         'country',
         'other_details'
     ];
@@ -119,6 +147,10 @@ class Account extends Model
         'bank_name' => 'string',
         'bank_branch' => 'string',
         'bank_account' => 'string',
+        'applied_for_payout' => 'integer',
+        'paid' => 'integer',
+        'last_date_applied' => 'date',
+        'last_date_paid' => 'date',
         'country' => 'string',
         'other_details' => 'string'
     ];

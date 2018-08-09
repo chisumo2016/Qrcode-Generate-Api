@@ -58,6 +58,30 @@
     <p>{!! $account->bank_account !!}</p>
 </div>
 
+<!-- Applied For Payout Field -->
+<div class="form-group">
+    {!! Form::label('applied_for_payout', 'Applied For Payout:') !!}
+    <p>{!! $account->applied_for_payout !!}</p>
+</div>
+
+<!-- Paid Field -->
+<div class="form-group">
+    {!! Form::label('paid', 'Paid:') !!}
+    <p>{!! $account->paid !!}</p>
+</div>
+
+<!-- Last Date Applied Field -->
+<div class="form-group">
+    {!! Form::label('last_date_applied', 'Last Date Applied:') !!}
+    <p>{!! $account->last_date_applied !!}</p>
+</div>
+
+<!-- Last Date Paid Field -->
+<div class="form-group">
+    {!! Form::label('last_date_paid', 'Last Date Paid:') !!}
+    <p>{!! $account->last_date_paid !!}</p>
+</div>
+
 <!-- Country Field -->
 <div class="form-group">
     {!! Form::label('country', 'Country:') !!}
