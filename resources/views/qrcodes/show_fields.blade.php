@@ -97,7 +97,7 @@
 <h3 class="text-center">Transactions doene on this Qrcode</h3>
 
 @include('trasanctions.table')
-    
+
 </div>
 @endif
 
