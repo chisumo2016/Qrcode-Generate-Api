@@ -122,7 +122,11 @@ class QrcodeController extends AppBaseController
             return redirect(route('qrcodes.index'));
         }
 
-        return view('qrcodes.show')->with('qrcode', $qrcode);
+        $trasanctions = $qrcode->trasanctions;
+
+        return view('qrcodes.show')
+            ->with('qrcode', $qrcode)
+            ->with('trasanctions', $trasanctions );
     }
 
     /**

@@ -92,6 +92,25 @@
 
 </div>
 
+@if($qrcode->user_id  == Auth::user()->id || Auth::user()->role_id < 3)
+<div class="col-xs-12">
+<h3 class="text-center">Transactions doene on this Qrcode</h3>
+
+@include('trasanctions.table')
+    
+</div>
+@endif
+
+
+
+
+
+
+
+
+
+
+
 {{--<!-- Id Field -->--}}
 {{--<div class="form-group">--}}
 {{--{!! Form::label('id', 'Id:') !!}--}}
