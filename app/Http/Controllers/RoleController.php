@@ -81,8 +81,8 @@ class RoleController extends AppBaseController
             return redirect(route('roles.index'));
         }
 
-        $users = $role->users();
-        
+        $users = $role->users;
+
 
         return view('roles.show')
             ->with('role', $role)

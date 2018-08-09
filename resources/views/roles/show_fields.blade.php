@@ -19,6 +19,7 @@
 </div>
 
 <h3 class="text-center">Users that belongs to see roles</h3>
+
 @include('users.table')
 
 
