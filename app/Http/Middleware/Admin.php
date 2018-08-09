@@ -20,7 +20,8 @@ class Admin
         if (Auth::user()->role_id !=  2)
         {
             Flash::error('Sorry, you have no permission to view this');
-            return redirect('/home');
+            return redirect('/trasanctions');
+
         }
         return $next($request); // pass the request or contine
     }

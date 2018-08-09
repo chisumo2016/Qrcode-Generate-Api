@@ -25,9 +25,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('qrcodes', 'QrcodeController');
 
-    Route::resource('roles', 'RoleController');
 
     Route::resource('trasanctions', 'TrasanctionController');
 
     Route::resource('users', 'UserController');
+
+    Route::resource('roles', 'RoleController')->middleware('Admin');
 });
