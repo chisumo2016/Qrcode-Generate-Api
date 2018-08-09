@@ -28,7 +28,7 @@
         {!! Form::label('withdraw_method', 'Withdraw Method:') !!}
         <p>{!! $account->withdraw_method !!}</p>
     </div>
-    
+
     <!-- Created At Field -->
     <div class="form-group">
         {!! Form::label('created_at', 'Created At:') !!}
@@ -100,11 +100,10 @@
         {!! Form::label('other_details', 'Other Details:') !!}
         <p>{!! $account->other_details !!}</p>
     </div>
-
-
 </div>
 
 
+@include('account_histories.table')
 
 
 {{--<!-- Deleted At Field -->--}}
