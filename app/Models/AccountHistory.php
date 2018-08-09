@@ -74,5 +74,13 @@ class AccountHistory extends Model
         
     ];
 
+    /**
+     * Get the user that owns this  account history.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
     
 }

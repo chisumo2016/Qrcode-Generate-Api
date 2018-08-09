@@ -102,8 +102,11 @@
     </div>
 </div>
 
+ <div class="col-xs-12">
+     <h3 class="text-center">Account History</h3>
+     @include('account_histories.table')
+ </div>
 
-@include('account_histories.table')
 
 
 {{--<!-- Deleted At Field -->--}}

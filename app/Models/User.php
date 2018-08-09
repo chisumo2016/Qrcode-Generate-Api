@@ -111,6 +111,12 @@ class User extends Model
         return $this->hasMany('App\Models\Qrcode');
     }
 
+    public function account_histories()
+    {
+        return $this->hasMany('App\Models\AccountHistory');
+    }
+
+
     /**
      * Get the account record associated with the user.
      */
