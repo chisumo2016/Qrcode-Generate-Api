@@ -9,16 +9,33 @@
                 <br/>
                 {{--<img src="http://infyom.com/images/logo/blue_logo_150x150.jpg" class="img-circle"--}}
                      {{--alt="User Image"/>--}}
+                <br/>
+                <br/>
             </div>
             <div class="pull-left info">
-                @if (Auth::guest())
 
-                <p> QRCode Generator </p>
+                <!-- Status -->
+                <a href="#"><i class="fa fa-circle text-success"></i>
+
+                    @if(Auth::user()->role_id == 1)
+                        Admin
+                    @elseif(Auth::user()->role_id == 2)
+                        Moderator
+                    @elseif(Auth::user()->role_id == 3)
+                        Webmaster
+                    @elseif(Auth::user()->role_id == 4)
+                        Buyer
+                    @endif
+                </a>
+                <br/>
+                <br/>
+
+                @if (Auth::guest())
+                <p>QRCode Generator</p>
                 @else
                     <p>{{ Auth::user()->name}}</p>
                 @endif
-                <!-- Status -->
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+
             </div>
         </div>
 
