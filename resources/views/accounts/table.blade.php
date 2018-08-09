@@ -22,10 +22,17 @@
     <tbody>
     @foreach($accounts as $account)
         <tr>
-            <td>{!! $account->user['email'] !!}</td>
-            <td>£{!! $account->balance !!}</td>
-            <td>£{!! $account->total_credit !!}</td>
-            <td>£{!! $account->total_debit !!}</td>
+            <td>
+                <a href="{!! route('accounts.show', [$account->id]) !!}" class='btn btn-default btn-xs'>
+
+                    {!! $account->user['email'] !!}
+                 </a>
+
+            </td>
+            <td>£ {!! number_format($account->balance, 2) !!}</td>
+            <td>£ {!! number_format($account->total_credit, 2) !!}</td>
+            <td>£ {!! number_format($account->total_debit, 2) !!}</td>
+
             {{--<td>{!! $account->withdraw_method !!}</td>--}}
             {{--<td>{!! $account->payment_email !!}</td>--}}
             {{--<td>{!! $account->bank_name !!}</td>--}}
@@ -38,11 +45,12 @@
             {{--<td>{!! $account->country !!}</td>--}}
             {{--<td>{!! $account->other_details !!}</td>--}}
             <td>
-                {!! Form::open(['route' => ['accounts.destroy', $account->id], 'method' => 'delete']) !!}
+                {{--{!! Form::open(['route' => ['accounts.destroy', $account->id], 'method' => 'delete']) !!}--}}
                 <div class='btn-group'>
-                    <a href="{!! route('accounts.show', [$account->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
+
                     <a href="{!! route('accounts.edit', [$account->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                    {{--<a href="{!! route('accounts.show', [$account->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>--}}
+                    {{--{!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}--}}
                 </div>
                 {!! Form::close() !!}
             </td>
