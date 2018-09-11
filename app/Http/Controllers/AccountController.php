@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
 use App\Models\Account;
+use App\Models\AccountHistory;
 use App\Repositories\AccountRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
@@ -164,6 +165,7 @@ class AccountController extends AppBaseController
          * Receive account id
          * Check if logged in user is same as owner of account
          * Update applied for payout field in accounts table
+         * Update the account history
          * Show success message
          * Redirect and display message success */
 
@@ -183,8 +185,16 @@ class AccountController extends AppBaseController
 
         Account::where('id', $account->id)->update([
             'applied_for_payout'=>1,
+            'paid'=>0
         ]);
-        Flash::success('Application submit successfully');
+
+        AccountHistory::create([
+            'user_id' => Auth::user()->id,
+            'account_id'=> $account->id,
+            'message'=>'Payout request initiated by account owner'
+        ]);
+
+        Flash::success('Application submitted successfully');
 
         return redirect()->back();
     }
@@ -192,7 +202,45 @@ class AccountController extends AppBaseController
 
     public function  mark_as_paid(Request $request)
     {
+        /*
+         * Receive account id
+         * Check if logged in user is an admin or moderator
+         * Update applied for payout field in accounts table to 0
+         * Update paid field in accounts table to 1
+         * Update the account history
+         * Show success message
+         * Redirect and display message success */
 
+//        $input = $request->input('apply_for_payout');
+        $account = $this->accountRepository->findWithoutFail($request->input('mark_as_paid'));
+
+        if (empty($account)) {
+            Flash::error('Account not found');
+
+            return redirect()->back();
+        }
+        if(Auth::user()->role_id > 2){
+
+            Flash::error('You cannot perform this operation if you are not an admin');
+
+            return redirect()->back();
+        }
+
+        Account::where('id', $account->id)->update([
+            'applied_for_payout'=>0,
+            'paid'=>1,
+        ]);
+
+        AccountHistory::create([
+            'user_id' => Auth::user()->id,
+            'account_id'=> $account->id,
+            'message'=>'Payment completed by admin:'.Auth::user()->id
+        ]);
+
+
+        Flash::success('Apccount marked as paid successfully');
+
+        return redirect()->back();
     }
 
 
