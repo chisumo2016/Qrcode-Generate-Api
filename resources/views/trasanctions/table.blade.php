@@ -4,11 +4,11 @@
 
         <th>Qrcode </th>
             <th>Buyer</th>
-        {{--<th>Qrcode Owner Id</th>--}}
-        <th>Method</th>
-        {{--<th>Message</th>--}}
-        <th>Amount</th>
-        <th>Status</th>
+            <th>Method</th>
+            <th>Amount</th>
+            <th>Status</th>
+            {{--<th>Qrcode Owner Id</th>--}}
+            {{--<th>Message</th>--}}
             {{--<th colspan="3">Action</th>--}}
         </tr>
     </thead>
@@ -31,16 +31,18 @@
             <td>{!! $trasanction->status !!} <br>
                 <small>{{ $trasanction->updated_at->format('D d,M,Y h:i') }} </small>
             </td>
-            {{--<td>--}}
-                {{--{!! Form::open(['route' => ['trasanctions.destroy', $trasanction->id], 'method' => 'delete']) !!}--}}
-                {{--<div class='btn-group'>--}}
-                    {{--<a href="{!! route('trasanctions.show', [$trasanction->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>--}}
-                    {{--<a href="{!! route('trasanctions.edit', [$trasanction->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>--}}
-                    {{--{!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}--}}
-                {{--</div>--}}
-                {{--{!! Form::close() !!}--}}
-            {{--</td>--}}
+
         </tr>
     @endforeach
     </tbody>
 </table>
+
+{{--<td>--}}
+{{--{!! Form::open(['route' => ['trasanctions.destroy', $trasanction->id], 'method' => 'delete']) !!}--}}
+{{--<div class='btn-group'>--}}
+{{--<a href="{!! route('trasanctions.show', [$trasanction->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>--}}
+{{--<a href="{!! route('trasanctions.edit', [$trasanction->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>--}}
+{{--{!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}--}}
+{{--</div>--}}
+{{--{!! Form::close() !!}--}}
+{{--</td>--}}
