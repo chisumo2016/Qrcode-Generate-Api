@@ -22,6 +22,13 @@
     <p>£ {!! $trasanction->amount !!}</p>
 </div>
 
+<!-- Amount Field -->
+@if($trasanction->drcode['product_url'])
+<div class="form-group">
+    {{--{!! Form::label('amount', 'Amount:') !!}--}}
+    <p><a href="{!! $trasanction->drcode['product_url'] !!}" class="btn btn-success btn-lg">Return to mechant side </a></p>
+</div>
+@endif
 
 <!-- User Id Field -->
 <div class="form-group">

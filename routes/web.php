@@ -26,7 +26,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('qrcodes', 'QrcodeController')->except(['show']);
 
 
-    Route::resource('trasanctions', 'TrasanctionController');
+    Route::resource('trasanctions', 'TrasanctionController')->except(['show']);
+
 
 
     Route::resource('users', 'UserController');
@@ -64,10 +65,11 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/qrcodes/{id}','QrcodeController@show')->name('qrcodes.show');
 
 //Paystack
-
+ // Accessisble when logged out
 Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
 Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 Route::post('/qrcodes.show_payment', 'QrcodeController@show_payment_page')->name('qrcodes.show_payment');
 
+Route::get('/transactions/{id}' ,'TrasanctionController@show')->name('trasanctions.show');
 
 //Route::resource('accounts', 'AccountController');

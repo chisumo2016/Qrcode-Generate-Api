@@ -75,6 +75,8 @@ class PaymentController extends Controller
             'message' => 'Received '.$transaction->payment_method.'payment from '. $buyer->email . 'from qrcode:'.$qrcode->product_name
         ]);
 
+        Flash::success('Payment successfully');
+
         //update the qrcode owner account  and account history
         $buyerAccount = Account::where('user_id', $paymentDetails['data']['metadata']['buyer_user_id'])->first();
         Account::where('user_id', $qrcode->user_id)->update([
