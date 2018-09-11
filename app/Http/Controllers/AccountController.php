@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
+use App\Models\Account;
 use App\Repositories\AccountRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Auth;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -178,6 +180,13 @@ class AccountController extends AppBaseController
 
             return redirect()->back();
         }
+
+        Account::where('id', $account->id)->update([
+            'applied_for_payout'=>1,
+        ]);
+        Flash::success('Application submit successfully');
+
+        return redirect()->back();
     }
 
 

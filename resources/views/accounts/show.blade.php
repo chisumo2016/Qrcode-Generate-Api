@@ -14,7 +14,7 @@
     </section>
 
     <h1 class="pull-right">
-        @if(Auth::user()->id == $account->user_id )
+        @if(Auth::user()->id == $account->user_id  && $account->applied_for_payout != 1 )
         {{--<a href="" class="btn btn-primary">Apply for payout</a>--}}
         {!! Form::open(['route' => ['accounts.apply_for_payout', 'method' => 'post', 'class'=>'pull-left']]) !!}
             <input type="hidden" value="{{ $account->id }}" name="apply_for_payout">
