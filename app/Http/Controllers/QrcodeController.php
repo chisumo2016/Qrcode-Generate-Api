@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 //use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
-
+use App\Http\Resources\Qrcode AS QrcodeResource;
 
 class QrcodeController extends AppBaseController
 {
@@ -39,6 +39,7 @@ class QrcodeController extends AppBaseController
     {
         // Only admins should be able to view all transaction
         if(Auth::user()->role_id < 3){
+
             $this->qrcodeRepository->pushCriteria(new RequestCriteria($request));
             $qrcodes = $this->qrcodeRepository->all();
         }else{
@@ -46,9 +47,9 @@ class QrcodeController extends AppBaseController
             $qrcodes  = QrcodeModel::where('user_id', Auth::user()->id)->get();
         }
 
-
-        return view('qrcodes.index')
-            ->with('qrcodes', $qrcodes);
+         return new QrcodeResource($qrcodes);
+//        return view('qrcodes.index')
+//            ->with('qrcodes', $qrcodes);
     }
 
     /**
