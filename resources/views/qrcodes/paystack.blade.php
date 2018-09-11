@@ -11,11 +11,16 @@
         <div class="box box-primary">
 
             <div class="box-body">
-                <div class="row">
+                <div class="row container">
                     <form method="POST" action="{{ route('pay') }}" accept-charset="UTF-8" class="form-horizontal" role="form">
+                        {{ csrf_field() }}
                         <div class="row" style="margin-bottom:40px;">
                             <div class="col-md-8 ">
-
+                               <p>
+                                  <h3>{{ $qrcode->product_name }}<br>
+                                    <small>{{ $qrcode->amount }} </small>
+                                </h3>
+                               </p>
                                 <input type="hidden" name="email" value="bchisumo74@gmail.com"> {{-- required --}}
                                 <input type="hidden" name="orderID" value="{{ $transaction->id }}">
                                 <input type="hidden" name="amount" value="3055{{ $qrcode->amount }}"> {{-- required in kobo --}}
@@ -35,7 +40,7 @@
 
                                 <p>
                                     <button class="btn btn-success btn-lg btn-block" type="submit" value="Pay Now!">
-                                        <i class="fa fa-plus-circle fa-lg"></i> Pay Now!
+                                        <i class="fa fa-plus-circle fa-lg"></i> Pay with paystack!
                                     </button>
                                 </p>
                             </div>

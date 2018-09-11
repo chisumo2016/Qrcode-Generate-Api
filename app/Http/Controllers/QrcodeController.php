@@ -221,14 +221,16 @@ class QrcodeController extends AppBaseController
 
         //Get rge user with this email
          $user = User::where('email', $input['email'])->first();
-         if(empty($user()))  //User doesnt exist
+
+        //User doesnt exist
+         if(empty($user))
          {
              //create user account
 
              $user = User::create([
-                 'name' => $input['email'],
-                 'email' => $input['email'],
-                 'password' => Hash::make($input['email']),
+                 'name'         => $input['email'],
+                 'email'        => $input['email'],
+                 'password'     => Hash::make($input['email']),
              ]);
 
              //$user->id;
@@ -237,11 +239,11 @@ class QrcodeController extends AppBaseController
          //get the qrcode details
          $qrcode =QrcodeModel::where('id', $input['qrcode_id'])->first();
          $transaction = Trasanction::create([
-             'user_id' => $user->id,
-             'qrcode_id'=>$qrcode->id,
+             'user_id'      =>  $user->id,
+             'qrcode_id'    =>  $qrcode->id,
              'status'=>'initiated',
              'qrcode_owner_id'=> $qrcode->user_id,
-             'payment_method'=>'paystack',
+             'payment_method'=>'paystack/card',
              'amount'=>$qrcode->amount
 
          ]);

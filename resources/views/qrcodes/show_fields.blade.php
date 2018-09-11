@@ -94,6 +94,7 @@
             {{--@include('qrcodes.paystack')--}}
          {{--@else--}}
             <form action="{{ route('qrcodes.show_payment') }}" method="post" role="form" class="col-md-6">
+                {{ csrf_field() }}
                 <div class="form-group" >
                     @if(Auth::guest())
                         {{--Only logged user get to see an email field--}}
