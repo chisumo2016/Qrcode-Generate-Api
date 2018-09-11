@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateQrcodeRequest;
 use App\Http\Requests\UpdateQrcodeRequest;
 use App\Models\Qrcode as QrcodeModel;
+use App\Models\Trasanction;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laracasts\Flash\Flash;
@@ -235,7 +236,16 @@ class QrcodeController extends AppBaseController
 
          //get the qrcode details
          $qrcode =QrcodeModel::where('id', $input['qrcode_id'])->first();
-          $buyer_id = $user->id;
-          return view('qrcodes.paystack',['qrcode'=>$qrcode, 'buyer_id'=> $buyer_id]);
+         $transaction = Trasanction::create([
+             'user_id' => $user->id,
+             'qrcode_id'=>$qrcode->id,
+             'status'=>'initiated',
+             'qrcode_owner_id'=> $qrcode->user_id,
+             'payment_method'=>'paystack',
+             'amount'=>$qrcode->amount
+
+         ]);
+          //$buyer_id = $user->id;
+          return view('qrcodes.paystack',['qrcode'=>$qrcode, 'transaction'=>$transaction, 'user'=> $user]);
     }
 }
