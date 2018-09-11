@@ -185,13 +185,15 @@ class AccountController extends AppBaseController
 
         Account::where('id', $account->id)->update([
             'applied_for_payout'=>1,
-            'paid'=>0
+            'paid'=>0,
+            'last_date_paid'=>date()
         ]);
 
         AccountHistory::create([
             'user_id' => Auth::user()->id,
             'account_id'=> $account->id,
-            'message'=>'Payout request initiated by account owner'
+            'message'=>'Payout request initiated by account owner',
+
         ]);
 
         Flash::success('Application submitted successfully');
@@ -229,10 +231,11 @@ class AccountController extends AppBaseController
         Account::where('id', $account->id)->update([
             'applied_for_payout'=>0,
             'paid'=>1,
+            'last_date_paid'=>date()
         ]);
 
         AccountHistory::create([
-            'user_id' => Auth::user()->id,
+            'user_id' => $account->user_id ,   //user_id' => Auth::user()->id,
             'account_id'=> $account->id,
             'message'=>'Payment completed by admin:'.Auth::user()->id
         ]);

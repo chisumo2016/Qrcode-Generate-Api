@@ -23,7 +23,7 @@
         {!! Form::close() !!}
         @endif
 
-        @if(Auth::user()->role_id < 3)
+        @if(Auth::user()->role_id < 3 && $account->paid   != 1 )
 
         {!! Form::open(['route' => ['accounts.mark_as_paid'], 'method' => 'post', 'class'=>'pull-right','style'=>'margin-left:10px']) !!}
 

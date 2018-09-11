@@ -5,6 +5,7 @@
         <th>Balance</th>
         <th>Total Credit</th>
         <th>Total Debit</th>
+        <th>Status</th>
         {{--<th>Withdraw Method</th>--}}
         {{--<th>Payment Email</th>--}}
         {{--<th>Bank Name</th>--}}
@@ -32,6 +33,12 @@
             <td>£ {!! number_format($account->balance, 2) !!}</td>
             <td>£ {!! number_format($account->total_credit, 2) !!}</td>
             <td>£ {!! number_format($account->total_debit, 2) !!}</td>
+            <td> @if($account->applied_for_payout == 1)
+                   Payment Pending
+                     @elseif($account->paid == 1)
+                   Paid
+                @endif
+            </td>
 
             {{--<td>{!! $account->withdraw_method !!}</td>--}}
             {{--<td>{!! $account->payment_email !!}</td>--}}

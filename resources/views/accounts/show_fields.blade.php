@@ -72,10 +72,10 @@
 
 
     <!-- Paid Field -->
-    <div class="form-group">
-        {!! Form::label('paid', 'Paid:') !!}
-        <p>{!! $account->paid !!}</p>
-    </div>
+    {{--<div class="form-group">--}}
+        {{--{!! Form::label('paid', 'Paid:') !!}--}}
+        {{--<p>{!! $account->paid !!}</p>--}}
+    {{--</div>--}}
 
     <!-- Last Date Applied Field -->
     <div class="form-group">
