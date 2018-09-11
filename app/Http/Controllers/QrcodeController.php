@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateQrcodeRequest;
 use App\Http\Requests\UpdateQrcodeRequest;
 use App\Models\Qrcode as QrcodeModel;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laracasts\Flash\Flash;
 use QRCode;
@@ -204,5 +205,32 @@ class QrcodeController extends AppBaseController
         Flash::success('Qrcode deleted successfully.');
 
         return redirect(route('qrcodes.index'));
+    }
+
+    public function  show_payment_page(Request $request)
+    {
+        /*
+         * Receive the buyer email
+         * Retrive user id using the buyer email
+         * Initiate tranbsaction
+         * Redirect to paystack payment page
+         * */
+
+        $input = $request->all();
+
+        //Get rge user with this email
+         $user = User::where('email', $input['email'])->first();
+         if(empty($user()))  //User doesnt exist
+         {
+             //create user account
+
+             $user = User::create([
+                 'name' => $input['email'],
+                 'email' => $input['email'],
+                 'password' => Hash::make($input['email']),
+             ]);
+
+             $user->id;
+         }
     }
 }

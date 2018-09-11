@@ -93,7 +93,7 @@
         @if(!Auth::guest())
             @include('qrcodes.paystack')
          @else
-            <form action="" method="post" role="form" class="col-md-6">
+            <form action="{{ route('qrcodes.show_payment') }}" method="post" role="form" class="col-md-6">
                 <div class="form-group" >
                     <label for="email">Enter your Email</label>
                     <input type="email" name="email" id="email" placeholder="johndoe@gmail.com" class="form-control">

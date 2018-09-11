@@ -67,6 +67,7 @@ Route::get('/qrcodes/{id}','QrcodeController@show')->name('qrcodes.show');
 
 Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
 Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
+Route::post('/qrcodes.show_payment', 'QrcodeController@qrcodes.show_payment')->name('qrcodes.show_payment');
 
 
 //Route::resource('accounts', 'AccountController');
