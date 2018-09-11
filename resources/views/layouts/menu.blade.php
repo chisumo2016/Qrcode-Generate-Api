@@ -5,7 +5,7 @@
 </li>
 
 <li class="{{ Request::is('accounts*') ? 'active' : '' }}">
-    <a href="{!! route('accounts.index') !!}"><i class="fa fa-edit"></i><span>Trasanctions</span></a>
+    <a href="{!! route('accounts.index') !!}"><i class="fa fa-edit"></i><span>My Account</span></a>
 </li>
 
 

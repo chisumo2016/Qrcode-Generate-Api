@@ -39,7 +39,7 @@ class TrasanctionController extends AppBaseController
 
             //if not admin
         }else{
-            $trasanctions = Trasanction::where('id', Auth::user()->id);
+            $trasanctions = Trasanction::where('id', Auth::user()->id)->get();
         }
 
 
