@@ -23,7 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::resource('qrcodes', 'QrcodeController');
+    Route::resource('qrcodes', 'QrcodeController')->except(['show']);
 
 
     Route::resource('trasanctions', 'TrasanctionController');
@@ -61,7 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/accountHistories/create', 'AccountHistoryController@index')->name('accountHistories.create')->middleware('Admin');
 });
 
-
+Route::get('/qrcodes/{id}','rcodeController@show')->name('qrcodes.show');
 
 
 //Route::resource('accounts', 'AccountController');

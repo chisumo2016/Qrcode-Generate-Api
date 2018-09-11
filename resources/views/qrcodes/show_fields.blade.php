@@ -36,20 +36,20 @@
         <hr>
 
     <div class="form-group">
-        {!! Form::label('user_id', 'User Name:') !!}
-        <p>{!! $qrcode->user_id !!}</p>
+        {!! Form::label('user_id', 'User:') !!}
+        <p>{!! $qrcode->user['email'] !!}</p>
     </div>
 
     <!-- Website Field -->
     <div class="form-group">
         {!! Form::label('website', 'Website:') !!}
-        <p>{!! $qrcode->website !!}</p>
+        <p><a href="{!! $qrcode->website !!}" target="_blank"></a>{!! $qrcode->website !!}</p>
     </div>
 
     <!-- Callback Url Field -->
     <div class="form-group">
         {!! Form::label('callback_url', 'Callback Url:') !!}
-        <p>{!! $qrcode->callback_url !!}</p>
+        <p><a href="{!! $qrcode->callback_url !!}" target="_blank">>{!! $qrcode->callback_url !!}</a></p>
     </div>
 
 
