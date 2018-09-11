@@ -88,7 +88,7 @@ class PaymentController extends Controller
             'message' => 'Paid'.$transaction->payment_method.'payment to'. $qrcode->user['email'] . 'from qrcode:'.$qrcode->product_name
         ]);
 
-        return redirect(route('transactions.show', ['id' => $transaction->id]));
+        return redirect(route('trasanctions.show', ['id' => $transaction->id]));
 
 
         //update buyer account and account history

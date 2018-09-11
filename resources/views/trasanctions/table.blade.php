@@ -21,13 +21,16 @@
 
                 <a href="{!! route('trasanctions.show', [$trasanction->id]) !!}">
                     {!! $trasanction->qrcode['product_name'] !!}
-                </a>
+                </a> |
+                <small>{{ $trasanction->created_at->format('D d,M,Y h:i') }} </small>
             </td>
             <td>{!! $trasanction->user['name'] !!}</td>
             <td>{!! $trasanction->payment_method !!}</td>
             {{--<td>{!! $trasanction->message !!}</td>--}}
             <td>£{!! $trasanction->amount !!}</td>
-            <td>{!! $trasanction->status !!}</td>
+            <td>{!! $trasanction->status !!} <br>
+                <small>{{ $trasanction->updated_at->format('D d,M,Y h:i') }} </small>
+            </td>
             {{--<td>--}}
                 {{--{!! Form::open(['route' => ['trasanctions.destroy', $trasanction->id], 'method' => 'delete']) !!}--}}
                 {{--<div class='btn-group'>--}}

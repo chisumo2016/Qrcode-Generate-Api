@@ -34,12 +34,14 @@ class TrasanctionController extends AppBaseController
          // admins should be able to view all transaction
         if(Auth::user()->role_id < 3)
         {
+            Flash::success('Transactions by all users');
             $this->trasanctionRepository->pushCriteria(new RequestCriteria($request));
             $trasanctions = $this->trasanctionRepository->all();
 
             //if not admin
         }else{
-            $trasanctions = Trasanction::where('id', Auth::user()->id)->get();
+            Flash::success('My Transactions');
+            $trasanctions = Trasanction::where('id', Auth::user()->id)->latest()->get();
         }
 
 
