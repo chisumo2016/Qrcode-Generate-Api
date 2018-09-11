@@ -61,7 +61,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/accountHistories/create', 'AccountHistoryController@index')->name('accountHistories.create')->middleware('Admin');
 });
 
-Route::get('/qrcodes/{id}','rcodeController@show')->name('qrcodes.show');
+Route::get('/qrcodes/{id}','QrcodeController@show')->name('qrcodes.show');
+
+//Paystack
+
+Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
+Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 
 
 //Route::resource('accounts', 'AccountController');
