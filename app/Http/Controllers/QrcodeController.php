@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Http\Resources\Qrcode AS QrcodeResource;
+use App\Http\Resources\QrcodeCollection AS QrcodeResourceCollection;
 
 class QrcodeController extends AppBaseController
 {
@@ -47,7 +48,7 @@ class QrcodeController extends AppBaseController
             $qrcodes  = QrcodeModel::where('user_id', Auth::user()->id)->get();
         }
 
-         return new QrcodeResource($qrcodes);
+         return new QrcodeResourceCollection($qrcodes);
 //        return view('qrcodes.index')
 //            ->with('qrcodes', $qrcodes);
     }
