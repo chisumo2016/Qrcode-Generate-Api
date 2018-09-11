@@ -53,7 +53,7 @@ class PaymentController extends Controller
             Flash::error('Sorry,you paid the wrong amount. pLeae conta');
             return redirect()->route('qrcodes.show',['id'=> $paymentDetails['data']['metadata']['qrcode_id'] ]);
         }
-        //
+
         //Update the transaction
         $transaction = Trasanction::where('id', $paymentDetails['data']['metadata']['transaction_id'] )->first();
 
@@ -74,7 +74,26 @@ class PaymentController extends Controller
             'account_id' =>$qrCodeOwnerAccount->id,
             'message' => 'Received '.$transaction->payment_method.'payment from '. $buyer->email . 'from qrcode:'.$qrcode->product_name
         ]);
+
+        //update the qrcode owner account  and account history
+        $buyerAccount = Account::where('user_id', $paymentDetails['data']['metadata']['buyer_user_id'])->first();
+        Account::where('user_id', $qrcode->user_id)->update([
+//            'balance'           =>  ($qrCodeOwnerAccount->balance +  $qrcode->amount),
+            'total_debit'      =>  ($qrCodeOwnerAccount->balance +  $qrcode->amount)
+        ]);
+
+        AccountHistory::create([
+            'user_id'  => $paymentDetails['data']['metadata']['buyer_user_id'],
+            'account_id' =>$buyerAccount->id,
+            'message' => 'Paid'.$transaction->payment_method.'payment to'. $qrcode->user['email'] . 'from qrcode:'.$qrcode->product_name
+        ]);
+
+        return redirect(route('transactions.show', ['id' => $transaction->id]));
+
+
         //update buyer account and account history
+        //QRCode owner email : $qrcode->user['email']
+        //Buyer email : $paymentDetails['data']['metadata']['buyer_user_id']
         //send email alert both parties
         //send sms
         // Now you have the payment details,
