@@ -96,7 +96,8 @@
             <form action="{{ route('qrcodes.show_payment') }}" method="post" role="form" class="col-md-6">
                 <div class="form-group" >
                     <label for="email">Enter your Email</label>
-                    <input type="email" name="email" id="email" placeholder="johndoe@gmail.com" class="form-control">
+                    <input type="email" name="email" id="email" placeholder="johndoe@gmail.com" class="form-control" required>
+                    <input type="hidden" name="qrcode_id" id="email" value="{{$qrcode->id}}">
                 </div>
 
                     <p>

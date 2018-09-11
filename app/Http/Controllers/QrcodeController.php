@@ -230,7 +230,12 @@ class QrcodeController extends AppBaseController
                  'password' => Hash::make($input['email']),
              ]);
 
-             $user->id;
+             //$user->id;
          }
+
+         //get the qrcode details
+         $qrcode =QrcodeModel::where('id', $input['qrcode_id'])->first();
+          $buyer_id = $user->id;
+          return view('qrcodes.paystack',['qrcode'=>$qrcode, 'buyer_id'=> $buyer_id]);
     }
 }
