@@ -14,17 +14,21 @@
     </section>
 
     <h1 class="pull-right">
+        @if(Auth::user()->id == $account->user_id )
         {{--<a href="" class="btn btn-primary">Apply for payout</a>--}}
-        {!! Form::open(['route' => ['users.destroy', $account->id], 'method' => 'delete']) !!}
-        {!! Form::button('<i class="glyphicon glyphicon-trash"></i> Apply for payout', ['type' => 'submit', 'class' => 'btn btn-primary', 'onclick' => "return confirm('Are you sure?')"]) !!}
+        {!! Form::open(['route' => ['users.destroy', $account->id], 'method' => 'delete', 'class'=>'pull-left']) !!}
+        {!! Form::button('<i class="glyphicon glyphicon-ok"></i> Apply for payout', ['type' => 'submit', 'class' => 'btn btn-primary', 'onclick' => "return confirm('Are you sure?')"]) !!}
 
         {!! Form::close() !!}
+        @endif
 
+        @if(Auth::user()->role_id < 3)
 
-        {!! Form::open(['route' => ['users.destroy', $account->id], 'method' => 'delete']) !!}
-        {!! Form::button('<i class="glyphicon glyphicon-trash"></i> Mark As Paid', ['type' => 'submit', 'class' => 'btn btn-primary ', 'onclick' => "return confirm('Are you sure?')"]) !!}
+        {!! Form::open(['route' => ['users.destroy', $account->id], 'method' => 'delete', 'class'=>'pull-right','style'=>'margin-left:10px']) !!}
+        {!! Form::button('<i class="glyphicon glyphicon-ok"></i> Mark As Paid', ['type' => 'submit', 'class' => 'btn btn-primary ', 'onclick' => "return confirm('Are you sure?')"]) !!}
 
         {!! Form::close() !!}
+        @endif
     </h1>
 
 
