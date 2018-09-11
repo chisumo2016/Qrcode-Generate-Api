@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\AccountHistory;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -54,7 +55,12 @@ class PaymentController extends Controller
         }
         //
         //Update the transaction
+        $transaction = Trasanction::where('id', $paymentDetails['data']['metadata']['transaction_id'] )->first();
+
         Trasanction::where('id', $paymentDetails['data']['metadata']['transaction_id'] )->update(['status'=>'completed']);
+
+        // Get buyer  details
+        $buyer = User::find($paymentDetails['data']['metadata']['buyer_user_id']);
 
         //update the qrcode owner account  and account history
         $qrCodeOwnerAccount = Account::where('user_id', $qrcode->user_id)->first();
@@ -63,7 +69,11 @@ class PaymentController extends Controller
             'total_credit'      =>  ($qrCodeOwnerAccount->balance +  $qrcode->amount)
         ]);
 
-        
+        AccountHistory::create([
+            'user_id'  => $qrcode->user_id,
+            'account_id' =>$qrCodeOwnerAccount->id,
+            'message' => 'Received '.$transaction->payment_method.'payment from '. $buyer->email . 'from qrcode:'.$qrcode->product_name
+        ]);
         //update buyer account and account history
         //send email alert both parties
         //send sms
