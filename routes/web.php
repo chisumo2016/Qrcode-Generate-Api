@@ -44,6 +44,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Only Admin
     Route::resource('roles', 'RoleController')->middleware('Admin');
+
+    Route::post('/accounts/apply_for_payout', 'AccounsController@apply_for_payout')->name('accounts.apply_for_payout');
+    Route::post('/accounts/mark_as_paid', 'AccounsController@mark_as_paid')->name('accounts.mark_as_paid');
 });
 
 
