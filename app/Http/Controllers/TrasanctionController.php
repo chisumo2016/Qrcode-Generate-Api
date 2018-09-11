@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTrasanctionRequest;
 use App\Http\Requests\UpdateTrasanctionRequest;
+use App\Models\Trasanction;
 use App\Repositories\TrasanctionRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Auth;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -29,10 +31,19 @@ class TrasanctionController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->trasanctionRepository->pushCriteria(new RequestCriteria($request));
-        $trasanctions = $this->trasanctionRepository->all();
+         // admins should be able to view all transaction
+        if(Auth::user()->role_id < 3)
+        {
+            $this->trasanctionRepository->pushCriteria(new RequestCriteria($request));
+            $trasanctions = $this->trasanctionRepository->all();
 
-        return view('trasanctions.index')
+            //if not admin
+        }else{
+            $trasanctions = Trasanction::where('id', Auth::user()->id);
+        }
+
+
+       return view('trasanctions.index')
             ->with('trasanctions', $trasanctions);
     }
 

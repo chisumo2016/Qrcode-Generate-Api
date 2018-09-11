@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateQrcodeRequest;
 use App\Http\Requests\UpdateQrcodeRequest;
 use App\Models\Qrcode as QrcodeModel;
+use Illuminate\Support\Facades\Auth;
 use Laracasts\Flash\Flash;
 use QRCode;
 
@@ -34,8 +35,15 @@ class QrcodeController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->qrcodeRepository->pushCriteria(new RequestCriteria($request));
-        $qrcodes = $this->qrcodeRepository->all();
+        // Only admins should be able to view all transaction
+        if(Auth::user()->role_id < 3){
+            $this->qrcodeRepository->pushCriteria(new RequestCriteria($request));
+            $qrcodes = $this->qrcodeRepository->all();
+        }else{
+            //
+            $qrcodes  = QrcodeModel::where('user_id', Auth::user()->id);
+        }
+
 
         return view('qrcodes.index')
             ->with('qrcodes', $qrcodes);

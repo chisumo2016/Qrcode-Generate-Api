@@ -1,16 +1,17 @@
 {{-- All User --}}
 
-<li class="{{ Request::is('trasanctions*') ? 'active' : '' }}">
-    <a href="{!! route('trasanctions.index') !!}"><i class="fa fa-edit"></i><span>Trasanctions</span></a>
+<li class="{{ Request::is('users*') ? 'active' : '' }}">
+    <a href="{!! route('users.show',['id'=> Auth::user()->id ]) !!}"><i class="fa fa-edit"></i><span>My Profiles</span></a>
 </li>
-
 
 <li class="{{ Request::is('accounts*') ? 'active' : '' }}">
-    <a href="{!! route('accounts.index') !!}"><i class="fa fa-edit"></i><span>Accounts</span></a>
+    <a href="{!! route('accounts.index') !!}"><i class="fa fa-edit"></i><span>Trasanctions</span></a>
 </li>
 
-<li class="{{ Request::is('accountHistories*') ? 'active' : '' }}">
-    <a href="{!! route('accountHistories.index') !!}"><i class="fa fa-edit"></i><span>Account Histories</span></a>
+
+
+<li class="{{ Request::is('trasanctions*') ? 'active' : '' }}">
+    <a href="{!! route('trasanctions.index') !!}"><i class="fa fa-edit"></i><span>Trasanctions</span></a>
 </li>
 
 
@@ -28,6 +29,17 @@
 <li class="{{ Request::is('users*') ? 'active' : '' }}">
     <a href="{!! route('users.index') !!}"><i class="fa fa-edit"></i><span>Users</span></a>
 </li>
+
+
+
+<li class="{{ Request::is('accounts*') ? 'active' : '' }}">
+    <a href="{!! route('accounts.index') !!}"><i class="fa fa-edit"></i><span>Accounts</span></a>
+</li>
+
+<li class="{{ Request::is('accountHistories*') ? 'active' : '' }}">
+    <a href="{!! route('accountHistories.index') !!}"><i class="fa fa-edit"></i><span>Account Histories</span></a>
+</li>
+
 @endif
 {{-- All Admin --}}
 @if(Auth::user()->role_id == 1)
