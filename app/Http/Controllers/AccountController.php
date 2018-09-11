@@ -154,4 +154,38 @@ class AccountController extends AppBaseController
 
         return redirect(route('accounts.index'));
     }
+
+
+    public function  apply_for_payout(Request $request)
+    {
+        /*
+         * Receive account id
+         * Check if logged in user is same as owner of account
+         * Update applied for payout field in accounts table
+         * Show success message
+         * Redirect and display message success */
+
+//        $input = $request->input('apply_for_payout');
+        $account = $this->accountRepository->findWithoutFail($request->input('apply_for_payout'));
+
+        if (empty($account)) {
+            Flash::error('Account not found');
+
+            return redirect()->back();
+        }
+        if(Auth::user()->id != $account->user_id){
+            Flash::error('You cannot perform this operation on an account that is not yours');
+
+            return redirect()->back();
+        }
+    }
+
+
+    public function  mark_as_paid(Request $request)
+    {
+
+    }
+
+
+
 }
