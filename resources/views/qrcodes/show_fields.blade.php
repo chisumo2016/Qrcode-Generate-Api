@@ -90,27 +90,32 @@
         <img src="{{ asset($qrcode->qrcode_path) }}" alt="" >
         </p>
     </div>
-        @if(!Auth::guest())
-            @include('qrcodes.paystack')
-         @else
+        {{--@if(!Auth::guest())--}}
+            {{--@include('qrcodes.paystack')--}}
+         {{--@else--}}
             <form action="{{ route('qrcodes.show_payment') }}" method="post" role="form" class="col-md-6">
                 <div class="form-group" >
+                    @if(Auth::guest())
+                        {{--Only logged user get to see an email field--}}
                     <label for="email">Enter your Email</label>
                     <input type="email" name="email" id="email" placeholder="johndoe@gmail.com" class="form-control" required>
-                    <input type="hidden" name="qrcode_id" id="email" value="{{$qrcode->id}}">
                 </div>
+                @else
+                    <input type="email" name="email" value="{{ Auth::user()->email }}">
+               @endif
 
+                <input type="hidden" name="qrcode_id" id="email" value="{{$qrcode->id}}">
                     <p>
                         <button class="btn btn-success btn-lg" type="submit" value="Pay Now!">
                             <i class="fa fa-plus-circle fa-lg"></i> Pay Now!
                         </button>
                     </p>
 
-
             </form>
-        @endif
+        {{--@endif--}}
 </div>
-
+</div>
+<div class="clearfix"></div>
 @if(!Auth::guest() && ($qrcode->user_id  == Auth::user()->id || Auth::user()->role_id < 3))
 <div class="col-xs-12">
 <h3 class="text-center">Transactions doene on this Qrcode</h3>
