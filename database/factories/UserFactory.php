@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,12 +13,13 @@ use Faker\Generator as Faker;
 | model instances for testing / seeding your application's database.
 |
 */
-$passwordHash = Hash::make('secret');
-$rememberToken =  str_random(10);
-$factory->define(App\User::class, function (Faker $faker) {
+
+$factory->define(App\Models\User::class, function (Faker $faker) {
+    $passwordHash = Hash::make('secret');
+    $rememberToken =  str_random(10);
     return [
         'name' => $faker->name,
-        //'role_id'=>$faker->numberBetween(1,4),
+        'role_id'=>$faker->numberBetween(1,4),
         'email' => $faker->unique()->safeEmail,
         'password' => $passwordHash, // secret
         'role_id'   => rand(1,4),

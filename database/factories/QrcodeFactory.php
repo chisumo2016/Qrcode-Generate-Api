@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Qrcode::class, function (Faker $faker) {
+$factory->define(App\Models\Qrcode::class, function (Faker $faker) {
     return [
         //
         'product_name'  => $faker -> sentence(rand(4, 8), true),

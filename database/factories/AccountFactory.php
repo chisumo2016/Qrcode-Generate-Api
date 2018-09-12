@@ -2,13 +2,13 @@
 
 use Faker\Generator as Faker;
 
-$withdraw_method  = array('bank','paypal','stripe','paystack');
-$factory->define(App\Account::class, function (Faker $faker) {
-    return [
-        'user_id'      =>  function(){
-            return App\Models\User::all()->random();
-        },
+$factory->define(App\Models\Account::class, function (Faker $faker) {
 
+    $withdraw_method  = array('bank','paypal','stripe','paystack');
+    $users = App\Models\User::pluck('id'); // generate array
+    //$users = App\Models\User::all()->random(); // generate object
+    return [
+        'user_id'=>$faker->unique()->randomElement($users),
         'balance' => $faker->numberBetween(200, 400),
         'total_credit' => $faker->numberBetween(50, 4000),
         'total_debit' => $faker->numberBetween(0, 200),
