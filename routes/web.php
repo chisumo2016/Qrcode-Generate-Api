@@ -17,11 +17,17 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 // only logged in users can view the below
 
 Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/users.api', function (){
+        return view('users.token');
+    });
+
 
     Route::resource('qrcodes', 'QrcodeController')->except(['show']);
 
