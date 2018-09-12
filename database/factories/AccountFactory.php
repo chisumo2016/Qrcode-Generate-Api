@@ -8,7 +8,7 @@ $factory->define(App\Account::class, function (Faker $faker) {
         'user_id'      =>  function(){
             return App\Models\User::all()->random();
         },
-        
+
         'balance' => $faker->numberBetween(200, 400),
         'total_credit' => $faker->numberBetween(50, 4000),
         'total_debit' => $faker->numberBetween(0, 200),

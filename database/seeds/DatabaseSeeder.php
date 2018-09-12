@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         factory('App\Models\User', 10)->create();
         factory('App\Models\Qrcode', 50)->create();
         factory('App\Models\Trasanction', 50)->create();
-        factory('App\Models\Account', 50)->create();
+        factory('App\Models\Account', 10)->create();
+        factory('App\Models\AccountHistory', 50)->create();
     }
 }
