@@ -14,10 +14,12 @@ class Qrcode extends JsonResource
      */
     public function toArray($request)
     {
-        //Showing at least
+        //Showing at leasthe
         //return parent::toArray($request);
         return [
-            'user_id'           => $this->user_id,
+            'user_id'           =>  $this->user_id,
+            'website'           =>  $this->website,
+            'amount'            =>  $this->amount,
             'company_name'      =>  $this->company_name,
             'product_name'      =>  $this->product_name,
             'created_at'        =>  $this->created_at,
