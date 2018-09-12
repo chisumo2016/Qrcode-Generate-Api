@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
+$status   = array('completed','initiated','failed');
 
 $factory->define(App\Trasanction::class, function (Faker $faker) {
 
@@ -18,8 +19,8 @@ $factory->define(App\Trasanction::class, function (Faker $faker) {
          },
 
          'payment_method'=> 'paystack/'.$faker->creditCardType,
-         'amount'=>  $faker->numberBetween(300, 4000),
-         'status'=>  'completed',
+         'amount' =>  $faker->numberBetween(200, 4000),
+         'status '=>  $status[rand(0,2)],
 
     ];
 });
