@@ -14,6 +14,11 @@ class QrcodeCollection extends ResourceCollection
      */
     public function toArray($request)
     {
+//        return [
+//            'user_id'       => $this->user_id,
+//            'company_name'  =>  $this->company_name,
+//            'product_name'  =>  $this->product_name
+//        ];
         return parent::toArray($request);
     }
 }
