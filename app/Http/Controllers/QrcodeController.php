@@ -47,6 +47,7 @@ class QrcodeController extends AppBaseController
             //
             $qrcodes  = QrcodeModel::where('user_id', Auth::user()->id)->get();
         }
+
         // check if request expect json
         if($request->expectsJson()){
             return new QrcodeResourceCollection($qrcodes);
@@ -99,10 +100,15 @@ class QrcodeController extends AppBaseController
         $newQrcode = QrcodeModel::where('id',$qrcode->id)->update(['qrcode_path' => $input['qrcode_path']]);
 
 
-
         // Save the qrcode
         if ($newQrcode)
         {
+            // check if request expect json
+            if($request->expectsJson()){
+                return new QrcodeResource($qrcode);
+            }
+
+
             //Save  data to the database
            // $qrcode = $this->qrcodeRepository->create($input);
 
