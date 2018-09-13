@@ -5,7 +5,7 @@
     <title>QRCODE Generator</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
-    {{--<link rel="stylesheet" href="{{ asset('js/app.css') }}">--}}
+    {{--<link rel="stylesheet" href="{{ asset('css/app.css') }}">--}}
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -157,6 +157,10 @@
 
     <!-- jQuery 3.1.1 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="{{ asset('/js/app.js') }}"></script>
+
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- AdminLTE App -->
@@ -166,7 +170,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"> </script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="//static-login.sendpulse.com/apps/fc3/build/loader.js"
+        sp-form-id="152467f169ef35697edd5901c26a4d19ce9df73be37d5f28155a7146e12997bb"></script>
+
+
+
     <script>
         $(document).ready(function() {
             $('table').DataTable();

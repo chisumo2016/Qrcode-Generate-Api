@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Models;
-
-use Eloquent as Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Eloquent as Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 
 /**
@@ -49,8 +49,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Model
 {
-    use SoftDeletes;
-    use HasApiTokens, Notifiable;
+    use SoftDeletes, HasApiTokens, Notifiable;
+
 
     public $table = 'users';
     

@@ -24,15 +24,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/users.api', function (){
+    Route::get('/users/api', function (){
         return view('users.token');
-    });
+    })->name('users.api');
 
 
     Route::resource('qrcodes', 'QrcodeController')->except(['show']);
 
 
-    Route::resource('trasanctions', 'TrasanctionController')->except(['show']);
+     Route::resource('/trasanctions', 'TrasanctionController')->except(['show']);
 
 
 
@@ -51,8 +51,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/users', 'UserController@index')->name('users.index');
     });
 
-    //Only Admin
-    Route::resource('roles', 'RoleController')->middleware('Admin');
+    //Only Admin can access this files
+    Route::resource('/roles', 'RoleController')->middleware('Admin');
 
    //Restrct url
     Route::post('/accounts/apply_for_payout', 'AccountController@apply_for_payout')->name('accounts.apply_for_payout');

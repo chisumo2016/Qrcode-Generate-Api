@@ -3,6 +3,9 @@
     {!! Form::label('name', 'Name:') !!}
     {!! Form::text('name', null, ['class' => 'form-control']) !!}
 </div>
+
+
+{{--User Level --}}
 @if(Auth::user()->role_id < 3)
 <!-- Role Id Field -->
 {{--<div class="form-group col-sm-6">--}}
