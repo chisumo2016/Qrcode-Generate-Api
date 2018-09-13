@@ -48,9 +48,9 @@ class QrcodeController extends AppBaseController
             $qrcodes  = QrcodeModel::where('user_id', Auth::user()->id)->get();
         }
 
-         //return new QrcodeResourceCollection($qrcodes);
-        return view('qrcodes.index')
-            ->with('qrcodes', $qrcodes);
+         return new QrcodeResourceCollection($qrcodes);
+//        return view('qrcodes.index')
+//            ->with('qrcodes', $qrcodes);
     }
 
     /**
