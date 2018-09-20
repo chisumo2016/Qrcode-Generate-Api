@@ -44,7 +44,7 @@ class QrcodeController extends AppBaseController
         if(Auth::user()->role_id < 3){
 
             $this->qrcodeRepository->pushCriteria(new RequestCriteria($request));
-            //Pagnate our API
+            //Paginate our API
             $qrcodes = $this->qrcodeRepository->paginate(5);
 
         }else{
@@ -52,16 +52,18 @@ class QrcodeController extends AppBaseController
             $qrcodes  = QrcodeModel::where('user_id', Auth::user()->id)->paginate(5);
             //$qrcodes  = QrcodeModel::where('user_id', Auth::user()->id)->get();
         }
-
-         //return new QrcodeResourceCollection($qrcodes);
-
-        // check if request expect json
-        //https://laravel.com/api/5.3/Illuminate/Http/Request.html
-
+        // 1
+        
+        // Check if request if expects Json
         if($request->expectsJson()){
-            //Resource Collection 118
-            return  QrcodeResourceCollection::collection($qrcodes);
-            //return new QrcodeResourceCollection($qrcodes);
+
+            return response([
+
+                'data' =>  QrcodeResourceCollection::collection($qrcodes)
+
+            ], Response::HTTP_OK);
+
+            //2
         }
 
         return view('qrcodes.index')
@@ -178,7 +180,7 @@ class QrcodeController extends AppBaseController
 
                 'data' => new QrcodeResource($qrcode)
 
-            ], 200);
+            ], Response::HTTP_OK);
             //return new QrcodeResourceCollection($qrcode);
         }
 
@@ -258,7 +260,7 @@ class QrcodeController extends AppBaseController
 
                 'data' => new QrcodeResource($qrcode)
 
-            ], 201);
+            ], Response::HTTP_CREATED);
 
             //return new QrcodeResource($getQrcode);
             //return new QrcodeResourceCollection($qrcode);
@@ -278,7 +280,7 @@ class QrcodeController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         $qrcode = $this->qrcodeRepository->findWithoutFail($id);
 
@@ -289,6 +291,17 @@ class QrcodeController extends AppBaseController
         }
 
         $this->qrcodeRepository->delete($id);
+
+        if($request->expectsJson())
+        {
+            //return response(null);
+            return response([
+
+                'message' => 'Qrcode deleted successfully'
+
+            ], Response::HTTP_NOT_FOUND);
+
+        }
 
         Flash::success('Qrcode deleted successfully.');
 
@@ -338,3 +351,15 @@ class QrcodeController extends AppBaseController
           return view('qrcodes.paystack',['qrcode'=>$qrcode, 'transaction'=>$transaction, 'user'=> $user]);
     }
 }
+// 1
+//return new QrcodeResourceCollection($qrcodes);
+
+// check if request expect json
+//https://laravel.com/api/5.3/Illuminate/Http/Request.html
+
+
+//2
+
+//Resource Collection 118
+// return  QrcodeResourceCollection::collection($qrcodes);
+//return new QrcodeResourceCollection($qrcodes);
