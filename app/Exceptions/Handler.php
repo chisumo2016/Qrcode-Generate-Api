@@ -57,7 +57,7 @@ class Handler extends ExceptionHandler
         {
             if($exception instanceof ErrorException){
                 return response()->json([
-                    'errors' => 'There is an error. Trying to get property of non-type '
+                    'errors' => 'There is an error. This item  does not exist  '
                 ],Response::HTTP_NOT_FOUND);
             }
         }
