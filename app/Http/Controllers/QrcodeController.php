@@ -53,7 +53,7 @@ class QrcodeController extends AppBaseController
             //$qrcodes  = QrcodeModel::where('user_id', Auth::user()->id)->get();
         }
         // 1
-        
+
         // Check if request if expects Json
         if($request->expectsJson()){
 
