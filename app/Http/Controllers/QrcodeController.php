@@ -57,7 +57,9 @@ class QrcodeController extends AppBaseController
         //https://laravel.com/api/5.3/Illuminate/Http/Request.html
 
         if($request->expectsJson()){
-            return new QrcodeResourceCollection($qrcodes);
+            //Resource Collection 118
+            return  QrcodeResourceCollection::collection($qrcodes);
+            //return new QrcodeResourceCollection($qrcodes);
         }
 
         return view('qrcodes.index')
