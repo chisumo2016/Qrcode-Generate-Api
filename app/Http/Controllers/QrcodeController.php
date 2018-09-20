@@ -101,7 +101,11 @@ class QrcodeController extends AppBaseController
         //dd($input['qrcode_path']);
 
         //updating database
-        $newQrcode = QrcodeModel::where('id',$qrcode->id)->update(['qrcode_path' => $input['qrcode_path']]);
+        $newQrcode = QrcodeModel::where('id',$qrcode->id)
+            ->update([
+                'qrcode_path' => $input['qrcode_path']
+
+            ]);
 
 
         // Save the qrcode
@@ -193,7 +197,39 @@ class QrcodeController extends AppBaseController
             return redirect(route('qrcodes.index'));
         }
 
-        $qrcode = $this->qrcodeRepository->update($request->all(), $id);
+       $qrcode = $this->qrcodeRepository->update($request->all(), $id);
+
+        //Generate qrcode
+        //save  qrcode image in our folder on this site
+
+        $file = 'qrcodes-generator/'.$qrcode->id.'.png';
+
+        QRCode::text("message")
+            ->setSize(8)
+            ->setMargin(2)
+            ->setOutfile($file)
+            ->png();
+
+        $input['qrcode_path'] = $file;
+
+        //dd($input['qrcode_path']);
+
+        //updating database
+        $newQrcode = QrcodeModel::where('id',$qrcode->id)
+            ->update([
+                'qrcode_path' => $input['qrcode_path']
+
+            ]);
+
+        $getQrcode = QrcodeModel::where('id',$qrcode->id)->first();
+
+        // check if request expect json
+        if($request->expectsJson()){
+
+            return new QrcodeResource($getQrcode);
+        }
+
+
 
         Flash::success('Qrcode updated successfully.');
 
