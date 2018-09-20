@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Permission;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -36,7 +37,7 @@ class Role extends Model
 
 
     public $fillable = [
-        'name'
+        'name', 'label'
     ];
 
     /**
@@ -46,7 +47,8 @@ class Role extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'name' => 'string'
+        'name' => 'string',
+        'label' => 'string'
     ];
 
     /**
@@ -63,6 +65,16 @@ class Role extends Model
     public function users()
     {
         return $this->hasMany('App\Models\User');
+    }
+
+    /**
+     * A role may be given various permissions.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class);
     }
 //
 }

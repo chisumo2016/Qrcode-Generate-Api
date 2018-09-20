@@ -6,7 +6,6 @@
 
 
 {{--User Level --}}
-@if(Auth::user()->role_id < 3)
 <!-- Role Id Field -->
 {{--<div class="form-group col-sm-6">--}}
     {{--{!! Form::label('role_id', 'User Level:') !!}--}}
@@ -15,14 +14,12 @@
 
 <div class="form-group col-sm-6">
     <label for="sel1">User Level:</label>
-    <select class="form-control" id="sel1">
-        <option value= ""{{ $user->role['id'] }}> {{ $user->role['name'] }}</option>
+    <select class="form-control" id="sel1" name="roles[]" multiple>
         @foreach($roles as $role)
-        <option value="{{ $role->id }}">{{ $role->name }}</option>
+            <option value="{{ $role->id }}">{{ $role->label }}</option>
         @endforeach
     </select>
 </div>
-@endif
 
 <!-- Email Field -->
 <div class="form-group col-sm-6">

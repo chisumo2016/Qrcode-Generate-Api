@@ -9,6 +9,7 @@ use App\Repositories\UserRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
@@ -21,6 +22,7 @@ class UserController extends AppBaseController
     public function __construct(UserRepository $userRepo)
     {
         $this->userRepository = $userRepo;
+        $this->middleware('is_admin'); //now this controller will be only access by webmaster group and admin
     }
 
     /**
@@ -45,7 +47,11 @@ class UserController extends AppBaseController
      */
     public function create()
     {
-        return view('users.create');
+        if ($this->user()->can('create.users')) {
+            return view('users.create');
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**
@@ -112,7 +118,8 @@ class UserController extends AppBaseController
 
         $roles = Role::all();
 
-        return view('users.edit')->with('user', $user)->with('roles', $roles);
+
+        return view('users.edit', compact('user', 'roles')); //->with('user', $user)->with('roles', $roles);
     }
 
     /**
@@ -126,6 +133,8 @@ class UserController extends AppBaseController
     public function update($id, UpdateUserRequest $request)
     {
         $user = $this->userRepository->findWithoutFail($id);
+
+        $user->roles()->sync($request->roles);
 
         if (empty($user)) {
             Flash::error('User not found');
@@ -169,5 +178,10 @@ class UserController extends AppBaseController
         Flash::success('User deleted successfully.');
 
         return redirect(route('users.index'));
+    }
+
+    private function user()
+    {
+        return Auth::user();
     }
 }

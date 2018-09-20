@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+
+use App\HasRole;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -49,7 +51,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class User extends Model
 {
-    use SoftDeletes, HasApiTokens, Notifiable;
+    use SoftDeletes, HasApiTokens, Notifiable, HasRole;
 
 
     public $table = 'users';
@@ -103,10 +105,10 @@ class User extends Model
     /**
      * Get the role that owns this users.   User can have one role
      */
-    public function role()
-    {
-        return $this->belongsTo('App\Models\Role');
-    }
+//    public function role()
+ //   {
+  //      return $this->belongsTo('App\Models\Role');
+  //  }
 
     /**
      * Get the transactions   for the user.

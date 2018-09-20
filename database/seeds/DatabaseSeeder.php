@@ -11,7 +11,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+
+
+        $this->call(UsersTableSeeder::class);
+        $this->call(RolesTableSeeder::class);
+        $this->call(AssignRoleSeeder::class);
+        $this->call(PermissionsSeeder::class);
         factory('App\Models\User', 10)->create();
         factory('App\Models\Qrcode', 50)->create();
         factory('App\Models\Trasanction', 50)->create();

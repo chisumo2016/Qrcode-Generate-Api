@@ -22,7 +22,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // only logged in users can view the below
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(/**
+ *
+ */
+    ['middleware' => 'auth'], function () {
 
     Route::get('/users/api', function (){
         return view('users.token');
@@ -52,7 +55,14 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     //Only Admin can access this files
-    Route::resource('/roles', 'RoleController')->middleware('Admin');
+    Route::get('/roles', 'RoleController@index')->name('roles.index');
+    Route::get('/roles/create', 'RoleController@create')->name('roles.create');
+    Route::get('/roles/{role}', 'RoleController@show')->name('roles.show');
+    Route::get('/roles/{role}/edit', 'RoleController@edit')->name('roles.edit');
+    Route::patch('/roles/{role}', 'RoleController@update')->name('roles.update');
+    Route::post('/roles', 'RoleController@store')->name('roles.store');
+    Route::delete('/roles/{role}', 'RoleController@destroy')->name('roles.destroy');
+    //Route::resource('/roles', 'RoleController')->middleware('Admin');
 
    //Restrct url
     Route::post('/accounts/apply_for_payout', 'AccountController@apply_for_payout')->name('accounts.apply_for_payout');
@@ -79,3 +89,15 @@ Route::post('/qrcodes.show_payment', 'QrcodeController@show_payment_page')->name
 Route::get('/transactions/{id}' ,'TrasanctionController@show')->name('trasanctions.show');
 
 //Route::resource('accounts', 'AccountController');
+
+
+//
+//Route::get('/wadday', function () {
+//
+//    $user = Auth::user();
+//    if($user->can('edit.users')) {
+//        return 'true';
+//    } else {
+//        return 'false';
+//    }
+//});

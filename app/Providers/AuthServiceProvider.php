@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Permission;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
+use Illuminate\Support\Facades\Schema;
 use Laravel\Passport\Passport;
 
 
@@ -28,6 +30,23 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         Passport::routes();
-        //
+
+        if (Schema::hasTable('permissions')) {
+            foreach($this->getPermission() as $permission) {
+                Gate::define($permission->name, function ($user) use ($permission) {
+                   return $user->hasRole($permission->roles);
+                });
+            }
+        }
+    }
+
+    /**
+     * Get the permissions with roles
+     *
+     * @return mixed
+     */
+    protected function getPermission()
+    {
+        return Permission::with('roles')->get();
     }
 }

@@ -17,18 +17,23 @@
 
 
 {{-- All Webmaster --}}
-@if(Auth::user()->role_id < 4)
 
+@can('view.qrcodes')
 <li class="{{ Request::is('qrcodes*') ? 'active' : '' }}">
     <a href="{!! route('qrcodes.index') !!}"><i class="fa fa-edit"></i><span>Qrcodes</span></a>
 </li>
-@endif
+@endcan
+
+{{--@if(Auth::user()->role_id < 4)--}}
+{{--@endif--}}
+
 
 {{-- All Moderators--}}
-@if(Auth::user()->role_id < 3)
+@can('view.users')
 <li class="{{ Request::is('users*') ? 'active' : '' }}">
     <a href="{!! route('users.index') !!}"><i class="fa fa-edit"></i><span>Users</span></a>
 </li>
+
 
 <li class="{{ Request::is('accounts*') ? 'active' : '' }}">
     <a href="{!! route('accounts.index') !!}"><i class="fa fa-edit"></i><span>Accounts</span></a>
@@ -38,17 +43,19 @@
     <a href="{!! route('accountHistories.index') !!}"><i class="fa fa-edit"></i><span>Account Histories</span></a>
 </li>
 
-@endif
+@endcan
 
 
 {{-- All Admin --}}
 
-@if(Auth::user()->role_id == 1)
+@can('view.roles')
 <li class="{{ Request::is('roles*') ? 'active' : '' }}">
     <a href="{!! route('roles.index') !!}"><i class="fa fa-edit"></i><span>Roles</span></a>
 </li>
+@endcan
 
-@endif
+{{--@if(Auth::user()->role_id == 1)--}}
+{{--@endif--}}
 
 
 
