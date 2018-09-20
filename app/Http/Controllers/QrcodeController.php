@@ -120,7 +120,11 @@ class QrcodeController extends AppBaseController
             // check if request expect json
             if($request->expectsJson()){
 
-                return new QrcodeResource($getQrcode);
+               return  new  QrcodeResourceCollection($getQrcode);
+
+               
+               // return new  QrcodeResourceCollection($getQrcode);
+                //return new QrcodeResource($getQrcode);
             }
 
             //Save  data to the database
@@ -147,7 +151,7 @@ class QrcodeController extends AppBaseController
      *
      * @return Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         $qrcode = $this->qrcodeRepository->findWithoutFail($id);
 
@@ -159,9 +163,16 @@ class QrcodeController extends AppBaseController
 
         $trasanctions = $qrcode->trasanctions;
 
+
+        if($request->expectsJson()){
+            //Resource Collection 118
+            return new  QrcodeResourceCollection($qrcode );
+            //return new QrcodeResourceCollection($qrcode);
+        }
+
         return view('qrcodes.show')
             ->with('qrcode', $qrcode)
-            ->with('trasanctions', $trasanctions );
+            ->with('trasanctions', $trasanctions,$qrcode );
     }
 
     /**
