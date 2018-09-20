@@ -16,9 +16,11 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 //use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Response;
+//use Response;
 use App\Http\Resources\Qrcode AS QrcodeResource;
 use App\Http\Resources\QrcodeCollection AS QrcodeResourceCollection;
+
+use Symfony\Component\HttpFoundation\Response;
 
 class QrcodeController extends AppBaseController
 {
@@ -124,7 +126,7 @@ class QrcodeController extends AppBaseController
 
                    'data' => new QrcodeResource($getQrcode)
 
-               ], 201);
+               ], Response::HTTP_CREATED);
 
 
                // return new  QrcodeResourceCollection($getQrcode);
@@ -170,7 +172,13 @@ class QrcodeController extends AppBaseController
 
         if($request->expectsJson()){
             //Resource Collection 118
-            return new  QrcodeResourceCollection($qrcode );
+            //return new  QrcodeResourceCollection($qrcode );
+
+            return response([
+
+                'data' => new QrcodeResource($qrcode)
+
+            ], 200);
             //return new QrcodeResourceCollection($qrcode);
         }
 
@@ -246,7 +254,14 @@ class QrcodeController extends AppBaseController
         // check if request expect json
         if($request->expectsJson()){
 
-            return new QrcodeResource($getQrcode);
+            return response([
+
+                'data' => new QrcodeResource($qrcode)
+
+            ], 201);
+
+            //return new QrcodeResource($getQrcode);
+            //return new QrcodeResourceCollection($qrcode);
         }
 
 
