@@ -120,7 +120,11 @@ class QrcodeController extends AppBaseController
             // check if request expect json
             if($request->expectsJson()){
 
-               return  new  QrcodeResourceCollection($getQrcode);
+               return response([
+
+                   'data' => new QrcodeResource($getQrcode)
+
+               ], 201);
 
 
                // return new  QrcodeResourceCollection($getQrcode);
