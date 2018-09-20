@@ -122,7 +122,7 @@ class QrcodeController extends AppBaseController
 
                return  new  QrcodeResourceCollection($getQrcode);
 
-               
+
                // return new  QrcodeResourceCollection($getQrcode);
                 //return new QrcodeResource($getQrcode);
             }
