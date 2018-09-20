@@ -48,7 +48,11 @@ class QrcodeController extends AppBaseController
             $qrcodes  = QrcodeModel::where('user_id', Auth::user()->id)->get();
         }
 
+         //return new QrcodeResourceCollection($qrcodes);
+
         // check if request expect json
+        //https://laravel.com/api/5.3/Illuminate/Http/Request.html
+
         if($request->expectsJson()){
             return new QrcodeResourceCollection($qrcodes);
         }
@@ -103,11 +107,12 @@ class QrcodeController extends AppBaseController
         // Save the qrcode
         if ($newQrcode)
         {
+            $getQrcode = QrcodeModel::where('id',$qrcode->id)->first();
             // check if request expect json
             if($request->expectsJson()){
-                return new QrcodeResource($qrcode);
-            }
 
+                return new QrcodeResource($getQrcode);
+            }
 
             //Save  data to the database
            // $qrcode = $this->qrcodeRepository->create($input);
