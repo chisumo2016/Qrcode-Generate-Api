@@ -42,10 +42,13 @@ class QrcodeController extends AppBaseController
         if(Auth::user()->role_id < 3){
 
             $this->qrcodeRepository->pushCriteria(new RequestCriteria($request));
-            $qrcodes = $this->qrcodeRepository->all();
+            //Pagnate our API
+            $qrcodes = $this->qrcodeRepository->paginate(5);
+
         }else{
-            //
-            $qrcodes  = QrcodeModel::where('user_id', Auth::user()->id)->get();
+            //Paginate if urnot an admin
+            $qrcodes  = QrcodeModel::where('user_id', Auth::user()->id)->paginate(5);
+            //$qrcodes  = QrcodeModel::where('user_id', Auth::user()->id)->get();
         }
 
          //return new QrcodeResourceCollection($qrcodes);
